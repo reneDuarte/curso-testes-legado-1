@@ -1,6 +1,5 @@
 package br.com.wmw.testes.service;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import br.com.wmw.testes.AppConfig;
@@ -16,13 +15,22 @@ public class FechamentoDiarioService {
 		}
 	}
 
-	//TODO: Adicionar uma validação para KM inicial e final do fechamento;
-	//TODO: KM inicial deve ser maior que zero
-	//TODO: KM final deve ser maior que zero
-	//TODO: KM final deve ser maior que a KM inicial
-	//TODO: Fazer os testes da nova regra de negócio
-	public void validate(final FechamentoDiario fechamentoDiario) throws SQLException {
+	private void validaKilometragemVeiculo(final double kmInicialVeiculo, final double kmFinalVeiculo) {
+		if (kmInicialVeiculo <= 0) {
+			throw new ValidationException(Messages.FECHAMENTO_DIARIO_MSG_KM_INICIAL_VEICULO_MAIOR_ZERO);
+		}
+		if (kmFinalVeiculo <= 0) {
+			throw new ValidationException(Messages.FECHAMENTO_DIARIO_MSG_KM_FINAL_VEICULO_MAIOR_ZERO);
+		}
+		if (kmFinalVeiculo <= kmInicialVeiculo) {
+			throw new ValidationException(Messages.FECHAMENTO_DIARIO_MSG_KM_FINAL_DEVE_SER_MAIOR_INICIAL);
+		}
+	}
+
+	public void validate(final FechamentoDiario fechamentoDiario) {
 		validaDataFechamentoDiario(fechamentoDiario.getDtFechamento());
+
+		validaKilometragemVeiculo(fechamentoDiario.getKmInicialVeiculo(), fechamentoDiario.getKmFinalVeiculo());
 
 		final int countAbertos = PedidoService.getInstance().countPedidosEmAberto();
 		final int countNaoTransmitidos = AppConfig.isBloqueiaFechamentoDiarioPedidosNaoTransmitidos() ? PedidoService.getInstance().countPedidosNaoTransmitidosFechamentoDiario() : 0;

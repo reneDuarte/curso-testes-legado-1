@@ -21,10 +21,20 @@ public class PedidoService {
 		return 0;
 	}
 
-	//TODO: Adicionar o desconto por estoque
-	//TODO: Se tiver desconto por estoque habilitado e estoque for > 1000, conceder desconto adicional de 5%
-	public Double calcularDesconto(final Double valor, final Integer quantidade, final Integer estoque) {
+	private double calcularDescontoPorEstoque(final long estoque) {
+		if (estoque >= 1000) {
+			return 20;
+		} else if (estoque >= 500) {
+			return 10;
+		} else if (estoque >= 100) {
+			return 5;
+		}
+		return 0;
+	}
+
+	public double calcularDesconto(final double valor, final long quantidade, final long estoque) {
 		double desconto = 0;
+
 		if (AppConfig.isUsaDescontoPorQuantidade()) {
 			if (quantidade >= 100) {
 				desconto = 20D;
@@ -34,6 +44,8 @@ public class PedidoService {
 				desconto = 5D;
 			}
 		}
+
+		desconto += calcularDescontoPorEstoque(estoque);
 
 		return valor * (1 - (desconto / 100));
 	}
