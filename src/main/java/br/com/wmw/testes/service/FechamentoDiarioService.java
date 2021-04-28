@@ -1,6 +1,5 @@
 package br.com.wmw.testes.service;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import br.com.wmw.testes.AppConfig;
@@ -16,12 +15,7 @@ public class FechamentoDiarioService {
 		}
 	}
 
-	//TODO: Adicionar uma validação para KM inicial e final do fechamento;
-	//TODO: KM inicial deve ser maior que zero
-	//TODO: KM final deve ser maior que zero
-	//TODO: KM final deve ser maior que a KM inicial
-	//TODO: Fazer os testes da nova regra de negócio
-	public void validate(final FechamentoDiario fechamentoDiario) throws SQLException {
+	public void validate(final FechamentoDiario fechamentoDiario) {
 		validaDataFechamentoDiario(fechamentoDiario.getDtFechamento());
 
 		final int countAbertos = PedidoService.getInstance().countPedidosEmAberto();
