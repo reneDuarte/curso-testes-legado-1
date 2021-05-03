@@ -8,58 +8,58 @@ import br.com.wmw.test.method.MethodTestUtils;
 
 class PedidoServiceTest {
 
-	private static final int DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_MIL = 20;
-	private static final int DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_QUINHENTOS = 10;
-	private static final int DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_CEM = 5;
-	private static final int DESCONTO_PARA_ESTOQUE_MENOR_CEM = 0;
+	private static final int VINTE_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_MIL = 20;
+	private static final int DEZ_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_QUINHENTOS = 10;
+	private static final int CINCO_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_CEM = 5;
+	private static final int NENHUM_DESCONTO_PARA_ESTOQUE_MENOR_CEM = 0;
 
 	@Test
-	void deveConcederDescontoQuandoEstoqueForIgualAMil() {
-		final PedidoService pedidoService = PedidoService.getInstance();
-		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 1000);
-		assertEquals(PedidoServiceTest.DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_MIL, desconto);
-	}
-
-	@Test
-	void deveConcederDescontoQuandoEstoqueForMaiorQueMil() {
+	void deveConcederVintePorcentoDeDescontoQuandoEstoqueForMaiorQueMil() {
 		final PedidoService pedidoService = PedidoService.getInstance();
 		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 1001);
-		assertEquals(PedidoServiceTest.DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_MIL, desconto);
+		assertEquals(PedidoServiceTest.VINTE_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_MIL, desconto);
 	}
 
 	@Test
-	void deveConcederDescontoQuandoEstoqueForIgualAQuinhentos() {
+	void deveConcederVintePorcentoDeDescontoQuandoEstoqueForIgualAMil() {
 		final PedidoService pedidoService = PedidoService.getInstance();
-		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 500);
-		assertEquals(PedidoServiceTest.DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_QUINHENTOS, desconto);
+		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 1000);
+		assertEquals(PedidoServiceTest.VINTE_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_MIL, desconto);
 	}
 
 	@Test
-	void deveConcederDescontoQuandoEstoqueForMaiorQueQuinhentos() {
+	void deveConcederDezPorcentoDeDescontoQuandoEstoqueForMaiorQueQuinhentos() {
 		final PedidoService pedidoService = PedidoService.getInstance();
 		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 501);
-		assertEquals(PedidoServiceTest.DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_QUINHENTOS, desconto);
+		assertEquals(PedidoServiceTest.DEZ_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_QUINHENTOS, desconto);
 	}
 
 	@Test
-	void deveConcederDescontoQuandoEstoqueForIgualACem() {
+	void deveConcederDezPorcentoDeDescontoQuandoEstoqueForIgualAQuinhentos() {
 		final PedidoService pedidoService = PedidoService.getInstance();
-		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 100);
-		assertEquals(PedidoServiceTest.DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_CEM, desconto);
+		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 500);
+		assertEquals(PedidoServiceTest.DEZ_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_QUINHENTOS, desconto);
 	}
 
 	@Test
-	void deveConcederDescontoQuandoEstoqueForMaiorQueCem() {
+	void deveConcederCincoPorcentoDeDescontoQuandoEstoqueForMaiorQueCem() {
 		final PedidoService pedidoService = PedidoService.getInstance();
 		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 101);
-		assertEquals(PedidoServiceTest.DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_CEM, desconto);
+		assertEquals(PedidoServiceTest.CINCO_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_CEM, desconto);
+	}
+
+	@Test
+	void deveConcederCincoPorcentoDeDescontoQuandoEstoqueForIgualACem() {
+		final PedidoService pedidoService = PedidoService.getInstance();
+		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 100);
+		assertEquals(PedidoServiceTest.CINCO_PORCENTO_DESCONTO_PARA_ESTOQUE_MAIOR_IGUAL_CEM, desconto);
 	}
 
 	@Test
 	void naoDeveConcederDescontoQuandoEstoqueForMenorQueCem() {
 		final PedidoService pedidoService = PedidoService.getInstance();
-		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 50);
-		assertEquals(PedidoServiceTest.DESCONTO_PARA_ESTOQUE_MENOR_CEM, desconto);
+		final double desconto = MethodTestUtils.invokePrivateMethod(pedidoService, "calcularDescontoPorEstoque", 99);
+		assertEquals(PedidoServiceTest.NENHUM_DESCONTO_PARA_ESTOQUE_MENOR_CEM, desconto);
 	}
 
 }
