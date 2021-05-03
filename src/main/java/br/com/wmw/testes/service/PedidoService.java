@@ -26,11 +26,11 @@ public class PedidoService {
 
 		if (AppConfig.isUsaDescontoPorQuantidade()) {
 			if (quantidade >= 100) {
-				desconto = 20D;
+				desconto = 20;
 			} else if (quantidade >= 50) {
-				desconto = 10D;
+				desconto = 10;
 			} else if (quantidade >= 10) {
-				desconto = 5D;
+				desconto = 5;
 			}
 		}
 
