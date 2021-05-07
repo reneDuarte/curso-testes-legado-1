@@ -10,6 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>8</java.version>
 		<junit.version>5.7.1</junit.version>
+		<method-test-utils.version>1.0.1</method-test-utils.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 	</properties>
@@ -21,11 +22,10 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>br.com.wmw</groupId>
 			<artifactId>method-test-utils</artifactId>
-			<version>1.0.0</version>
+			<version>${method-test-utils.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
