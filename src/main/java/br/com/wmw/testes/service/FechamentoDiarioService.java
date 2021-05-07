@@ -15,6 +15,21 @@ public class FechamentoDiarioService {
 		}
 	}
 
+	private void validarKM(double kmini , double kmfim){
+		if(kmini <= 0){
+			throw new ValidationException("kmini menor que zero");
+		}
+		if(kmfim <= 0){
+			throw new ValidationException("kmfim menor que zero");
+		}
+		if(kmfim == kmini){
+			 throw new ValidationException(Messages.KMIGUAUIS);
+		}
+		if(kmfim < kmini){
+			throw new ValidationException("ini não pode ser maio que ini");
+		}
+	}
+
 	public void validate(final FechamentoDiario fechamentoDiario) {
 		validaDataFechamentoDiario(fechamentoDiario.getDtFechamento());
 
