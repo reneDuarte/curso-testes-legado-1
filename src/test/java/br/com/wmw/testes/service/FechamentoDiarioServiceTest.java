@@ -32,7 +32,7 @@ class FechamentoDiarioServiceTest {
 
 	}
 
-	@ParameterizedTest(name="{index}")
+	@ParameterizedTest
 	@CsvSource({ "1,2" , "2,3"})
 	void deveTesteTestarKm(double kmIni, double kmFinal , TestInfo info, TestReporter testReporter) {
 		MethodTestUtils.invokePrivateMethod(fechamentoDiarioService, "validarKM", kmIni, kmFinal);
